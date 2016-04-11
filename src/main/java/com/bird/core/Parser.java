@@ -192,7 +192,4 @@ public class Parser<E> extends ContextAwareBase {
         }
     }
 
-    // public void setStatusManager(StatusManager statusManager) {
-    // this.statusManager = statusManager;
-    // }
 }

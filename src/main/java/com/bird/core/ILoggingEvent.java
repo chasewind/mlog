@@ -11,4 +11,12 @@ public interface ILoggingEvent {
     StackTraceElement[] getCallerData();
 
     long getTimeStamp();
+
+    LoggerContextVO getLogContextVO();
+
+    Level getLevel();
+
+    String getFormattedMessage();
+
+    IThrowableProxy getThrowableProxy();
 }

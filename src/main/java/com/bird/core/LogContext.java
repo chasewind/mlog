@@ -83,4 +83,9 @@ public class LogContext extends ContextBase implements ILogFactory {
         System.out.println("log has no appender..");
 
     }
+
+    public boolean isPackagingDataEnabled() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

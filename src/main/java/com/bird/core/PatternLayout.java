@@ -50,13 +50,6 @@ public class PatternLayout extends PatternLayoutBase<ILoggingEvent> {
         defaultConverterMap.put("rootException", RootCauseFirstThrowableProxyConverter.class.getName());
         defaultConverterMap.put("throwable", ThrowableProxyConverter.class.getName());
 
-        defaultConverterMap.put("xEx", ExtendedThrowableProxyConverter.class.getName());
-        defaultConverterMap.put("xException", ExtendedThrowableProxyConverter.class.getName());
-        defaultConverterMap.put("xThrowable", ExtendedThrowableProxyConverter.class.getName());
-
-        defaultConverterMap.put("nopex", NopThrowableInformationConverter.class.getName());
-        defaultConverterMap.put("nopexception", NopThrowableInformationConverter.class.getName());
-
         defaultConverterMap.put("cn", ContextNameConverter.class.getName());
         defaultConverterMap.put("contextName", ContextNameConverter.class.getName());
 
@@ -65,8 +58,6 @@ public class PatternLayout extends PatternLayoutBase<ILoggingEvent> {
         defaultConverterMap.put("property", PropertyConverter.class.getName());
 
         defaultConverterMap.put("n", LineSeparatorConverter.class.getName());
-
-        defaultConverterMap.put("lsn", LocalSequenceNumberConverter.class.getName());
 
     }
 

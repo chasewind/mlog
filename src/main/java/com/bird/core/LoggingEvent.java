@@ -56,4 +56,24 @@ public class LoggingEvent implements ILoggingEvent {
         return this.timeStamp;
     }
 
+    @Override
+    public LoggerContextVO getLogContextVO() {
+        return null;
+    }
+
+    @Override
+    public Level getLevel() {
+        return null;
+    }
+
+    @Override
+    public String getFormattedMessage() {
+        return null;
+    }
+
+    @Override
+    public IThrowableProxy getThrowableProxy() {
+        return null;
+    }
+
 }
