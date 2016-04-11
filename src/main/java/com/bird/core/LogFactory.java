@@ -94,6 +94,6 @@ public class LogFactory {
             throw new RuntimeException("class loader fail...");
         }
         return staticLoggerBinderPathSet;
-    }
 
+    }
 }
