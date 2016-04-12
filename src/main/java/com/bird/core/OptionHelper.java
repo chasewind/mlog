@@ -2,7 +2,26 @@ package com.bird.core;
 
 import java.lang.reflect.Constructor;
 
+import com.bird.core.exceptions.ScanException;
+import com.bird.core.subst.NodeToStringTransformer;
+
 public class OptionHelper {
+
+    public static String getSystemProperty(String key, String def) {
+        try {
+            return System.getProperty(key, def);
+        } catch (SecurityException e) {
+            return def;
+        }
+    }
+
+    public static String getEnv(String key) {
+        try {
+            return System.getenv(key);
+        } catch (SecurityException e) {
+            return null;
+        }
+    }
 
     public static ClassLoader getClassLoaderOfClass(final Class<?> clazz) {
         ClassLoader cl = clazz.getClassLoader();
@@ -52,4 +71,20 @@ public class OptionHelper {
             throw new DynamicClassLoadingException("Failed to instantiate type " + className, t);
         }
     }
+
+    public static String substVars(String val, PropertyContainer pc1) {
+        return substVars(val, pc1, null);
+    }
+
+    /**
+     * See http://logback.qos.ch/manual/configuration.html#variableSubstitution
+     */
+    public static String substVars(String input, PropertyContainer pc0, PropertyContainer pc1) {
+        try {
+            return NodeToStringTransformer.substituteVariable(input, pc0, pc1);
+        } catch (ScanException e) {
+            throw new IllegalArgumentException("Failed to parse input [" + input + "]", e);
+        }
+    }
+
 }

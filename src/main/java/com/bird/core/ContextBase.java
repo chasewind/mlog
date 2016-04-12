@@ -5,10 +5,11 @@ import java.util.Map;
 
 public class ContextBase implements Context {
 
-    private long        birthTime   = System.currentTimeMillis();
-    private String      name;
-    Map<String, Object> objectMap   = new HashMap<String, Object>();
-    Map<String, String> propertyMap = new HashMap<String, String>();
+    private long               birthTime        = System.currentTimeMillis();
+    private String             name;
+    Map<String, Object>        objectMap        = new HashMap<String, Object>();
+    Map<String, String>        propertyMap      = new HashMap<String, String>();
+    public static final String CONTEXT_NAME_KEY = "CONTEXT_NAME";
 
     public String getName() {
         return name;
@@ -26,6 +27,10 @@ public class ContextBase implements Context {
         objectMap.put(key, value);
     }
 
+    public void removeObject(String key) {
+        objectMap.remove(key);
+    }
+
     public Map<String, String> getCopyOfPropertyMap() {
         return new HashMap<String, String>(propertyMap);
     }
@@ -33,5 +38,36 @@ public class ContextBase implements Context {
     @Override
     public long getBirthTime() {
         return birthTime;
+    }
+
+    @Override
+    public String getProperty(String key) {
+        if (CONTEXT_NAME_KEY.equals(key)) return getName();
+
+        return (String) this.propertyMap.get(key);
+    }
+
+    @Override
+    public void putProperty(String key, String value) {
+        this.propertyMap.put(key, value);
+    }
+
+    public void reset() {
+        removeShutdownHook();
+        propertyMap.clear();
+        objectMap.clear();
+    }
+
+    private void removeShutdownHook() {
+        Thread hook = (Thread) getObject(CoreConstants.SHUTDOWN_HOOK_THREAD);
+        if (hook != null) {
+            removeObject(CoreConstants.SHUTDOWN_HOOK_THREAD);
+            try {
+                Runtime.getRuntime().removeShutdownHook(hook);
+            } catch (IllegalStateException e) {
+                // if JVM is already shutting down, ISE is thrown
+                // no need to do anything else
+            }
+        }
     }
 }

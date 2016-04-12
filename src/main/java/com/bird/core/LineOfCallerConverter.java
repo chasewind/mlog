@@ -1,5 +1,7 @@
 package com.bird.core;
 
+import com.bird.core.parser.ClassicConverter;
+
 public class LineOfCallerConverter extends ClassicConverter {
 
     public static String NA = "?";

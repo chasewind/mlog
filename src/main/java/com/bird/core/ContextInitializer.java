@@ -2,6 +2,8 @@ package com.bird.core;
 
 import java.net.URL;
 
+import com.bird.core.config.BasicConfigurator;
+
 /**
  * <p>
  * 类ContextInitializer.java的实现描述
@@ -14,7 +16,7 @@ import java.net.URL;
  */
 public class ContextInitializer {
 
-    final public static String AUTOCONFIG_FILE = "log.xml";
+    final public static String AUTOCONFIG_FILE = "mocklog.xml";
     final LogContext           logContext;
 
     public ContextInitializer(LogContext logContext){

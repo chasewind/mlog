@@ -1,5 +1,10 @@
 package com.bird.core;
 
+/**
+ * 类SpacePadder.java的实现描述：TODO 类实现描述:格式化信息，通过调整空格个数，使数据格式一致
+ * 
+ * @author dongwei.ydw 2016年4月11日 下午2:03:49
+ */
 public class SpacePadder {
 
     final static String[] SPACES = { " ", "  ", "    ", "        ", // 1,2,4,8
@@ -33,9 +38,6 @@ public class SpacePadder {
         }
     }
 
-    /**
-     * Fast space padding method.
-     */
     final static public void spacePad(StringBuilder sbuf, int length) {
         while (length >= 32) {
             sbuf.append(SPACES[5]);

@@ -1,5 +1,7 @@
 package com.bird.core;
 
+import com.bird.core.parser.ClassicConverter;
+
 public abstract class NamedConverter extends ClassicConverter {
 
     Abbreviator abbreviator = null;

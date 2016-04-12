@@ -2,6 +2,8 @@ package com.bird.core;
 
 import java.util.Map;
 
+import com.bird.core.parser.ClassicConverter;
+
 public class PropertyConverter extends ClassicConverter {
 
     String key;

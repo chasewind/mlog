@@ -3,6 +3,8 @@ package com.bird.core;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.bird.core.parser.CompositeConverter;
+
 public class ReplacingCompositeConverter<E> extends CompositeConverter<E> {
 
     Pattern pattern;

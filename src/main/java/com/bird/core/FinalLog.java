@@ -2,10 +2,11 @@ package com.bird.core;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public final class FinalLog implements Log {
+public final class FinalLog implements Log, AppenderAttachable<ILoggingEvent> {
 
     private String                                          name;
     transient private Level                                 level;
@@ -213,4 +214,57 @@ public final class FinalLog implements Log {
     private boolean isRootLog() {
         return parent == null;
     }
+
+    public void recursiveReset() {
+        detachAndStopAllAppenders();
+        localLevelReset();
+        additive = true;
+        if (childrenList == null) {
+            return;
+        }
+        for (FinalLog childLogger : childrenList) {
+            childLogger.recursiveReset();
+        }
+    }
+
+    private void localLevelReset() {
+        effectiveLevelInt = Level.DEBUG_INT;
+        if (isRootLog()) {
+            level = Level.DEBUG;
+        } else {
+            level = null;
+        }
+    }
+
+    public void detachAndStopAllAppenders() {
+        if (aai != null) {
+            aai.detachAndStopAllAppenders();
+        }
+    }
+
+    @Override
+    public Iterator<Appender<ILoggingEvent>> iteratorForAppenders() {
+        return null;
+    }
+
+    @Override
+    public Appender<ILoggingEvent> getAppender(String name) {
+        return null;
+    }
+
+    @Override
+    public boolean isAttached(Appender<ILoggingEvent> appender) {
+        return false;
+    }
+
+    @Override
+    public boolean detachAppender(Appender<ILoggingEvent> appender) {
+        return false;
+    }
+
+    @Override
+    public boolean detachAppender(String name) {
+        return false;
+    }
+
 }

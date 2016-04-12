@@ -1,5 +1,7 @@
 package com.bird.core;
 
+import com.bird.core.parser.ClassicConverter;
+
 public class FileOfCallerConverter extends ClassicConverter {
 
     public static final String NA = "?";
