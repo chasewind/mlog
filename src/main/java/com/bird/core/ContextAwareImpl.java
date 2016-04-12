@@ -27,4 +27,10 @@ public class ContextAwareImpl implements ContextAware {
         return this.context;
     }
 
+    @Override
+    public void addError(String string, Exception e) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

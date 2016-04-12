@@ -69,4 +69,9 @@ abstract public class DynamicConverter<E> extends FormattingConverter<E> impleme
         cab.addError(msg);
     }
 
+    @Override
+    public void addError(String string, Exception e) {
+        // TODO Auto-generated method stub
+
+    }
 }

@@ -58,7 +58,7 @@ public class LogContext extends ContextBase implements ILogFactory, LifeCycle {
         updateLoggerContextVO();
     }
 
-    public final FinalLog getLog(final Class<?> clazz) {
+    public final Log getLog(final Class<?> clazz) {
         return getLog(clazz.getName());
     }
 

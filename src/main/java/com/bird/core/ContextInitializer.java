@@ -3,6 +3,8 @@ package com.bird.core;
 import java.net.URL;
 
 import com.bird.core.config.BasicConfigurator;
+import com.bird.core.exceptions.JoranException;
+import com.bird.core.jaran.JoranConfigurator;
 
 /**
  * <p>
@@ -45,7 +47,18 @@ public class ContextInitializer {
     }
 
     public void configureByResource(URL url) {
-
+        try {
+            final String urlString = url.toString();
+            if (urlString.endsWith("xml")) {
+                JoranConfigurator configurator = new JoranConfigurator();
+                configurator.setContext(logContext);
+                configurator.doConfigure(url);
+            } else {
+                System.err.println("file[mocklog.xml] not found...");
+            }
+        } catch (JoranException e) {
+            e.printStackTrace();
+        }
     }
 
 }

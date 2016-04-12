@@ -11,4 +11,10 @@ public interface Context extends PropertyContainer {
     void putProperty(String key, String value);
 
     long getBirthTime();
+
+    Object getConfigurationLock();
+
+    String getName();
+
+    void setName(String name);
 }

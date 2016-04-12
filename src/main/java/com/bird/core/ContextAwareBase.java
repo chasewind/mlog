@@ -28,7 +28,15 @@ public class ContextAwareBase implements ContextAware {
         return this.context;
     }
 
+    public void addInfo(String msg) {
+        System.err.println("info---->" + msg);
+    }
+
     public void addError(String msg) {
         System.err.println("error---->" + msg);
+    }
+
+    public void addError(String msg, Exception e) {
+        System.err.println("error---->" + msg + ",<---" + e.getMessage());
     }
 }

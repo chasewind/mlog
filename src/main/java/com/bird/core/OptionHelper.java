@@ -1,6 +1,7 @@
 package com.bird.core;
 
 import java.lang.reflect.Constructor;
+import java.util.Properties;
 
 import com.bird.core.exceptions.ScanException;
 import com.bird.core.subst.NodeToStringTransformer;
@@ -21,6 +22,24 @@ public class OptionHelper {
         } catch (SecurityException e) {
             return null;
         }
+    }
+
+    public static boolean toBoolean(String value, boolean dEfault) {
+        if (value == null) {
+            return dEfault;
+        }
+
+        String trimmedVal = value.trim();
+
+        if ("true".equalsIgnoreCase(trimmedVal)) {
+            return true;
+        }
+
+        if ("false".equalsIgnoreCase(trimmedVal)) {
+            return false;
+        }
+
+        return dEfault;
     }
 
     public static ClassLoader getClassLoaderOfClass(final Class<?> clazz) {
@@ -87,4 +106,36 @@ public class OptionHelper {
         }
     }
 
+    public static boolean isEmpty(String str) {
+        return ((str == null) || CoreConstants.EMPTY_STRING.equals(str));
+    }
+
+    public static void setSystemProperty(ContextAware contextAware, String key, String value) {
+        try {
+            System.setProperty(key, value);
+        } catch (SecurityException e) {
+            contextAware.addError("Failed to set system property [" + key + "]", e);
+        }
+    }
+
+    /**
+     * Very similar to {@link System#getProperties()} except that the {@link SecurityException} is absorbed.
+     *
+     * @return the system properties
+     */
+    public static Properties getSystemProperties() {
+        try {
+            return System.getProperties();
+        } catch (SecurityException e) {
+            return new Properties();
+        }
+    }
+
+    public static void setSystemProperties(ContextAware contextAware, Properties props) {
+        for (Object o : props.keySet()) {
+            String key = (String) o;
+            String value = props.getProperty(key);
+            setSystemProperty(contextAware, key, value);
+        }
+    }
 }

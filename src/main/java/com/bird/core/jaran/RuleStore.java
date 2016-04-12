@@ -1,6 +1,10 @@
-package com.bird.core;
+package com.bird.core.jaran;
 
 import java.util.List;
+
+import com.bird.core.ElementPath;
+import com.bird.core.ElementSelector;
+import com.bird.core.jaran.action.Action;
 
 public interface RuleStore {
 

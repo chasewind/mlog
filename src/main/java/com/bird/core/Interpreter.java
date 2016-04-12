@@ -10,6 +10,9 @@ import java.util.Vector;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 
+import com.bird.core.jaran.RuleStore;
+import com.bird.core.jaran.action.Action;
+
 public class Interpreter {
 
     private static List<Action>             EMPTY_LIST = new Vector<Action>(0);

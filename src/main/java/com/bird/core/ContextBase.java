@@ -3,7 +3,7 @@ package com.bird.core;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ContextBase implements Context {
+public class ContextBase implements Context, LifeCycle {
 
     private long               birthTime        = System.currentTimeMillis();
     private String             name;
@@ -69,5 +69,29 @@ public class ContextBase implements Context {
                 // no need to do anything else
             }
         }
+    }
+
+    @Override
+    public Object getConfigurationLock() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void stop() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isStarted() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
