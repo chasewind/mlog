@@ -13,6 +13,8 @@ import com.bird.core.jaran.action.AppenderRefAction;
 import com.bird.core.jaran.action.ContextPropertyAction;
 import com.bird.core.jaran.action.ConversionRuleAction;
 import com.bird.core.jaran.action.DefinePropertyAction;
+import com.bird.core.jaran.action.NestedBasicPropertyIA;
+import com.bird.core.jaran.action.NestedComplexPropertyIA;
 import com.bird.core.jaran.action.NewRuleAction;
 import com.bird.core.jaran.action.ParamAction;
 import com.bird.core.jaran.action.PropertyAction;

@@ -9,8 +9,8 @@ public class StartEvent extends SaxEvent {
     final public Attributes  attributes;
     final public ElementPath elementPath;
 
-    StartEvent(ElementPath elementPath, String namespaceURI, String localName, String qName, Attributes attributes,
-               Locator locator){
+    public StartEvent(ElementPath elementPath, String namespaceURI, String localName, String qName,
+                      Attributes attributes, Locator locator){
         super(namespaceURI, localName, qName, locator);
         // locator impl is used to take a snapshot!
         this.attributes = new AttributesImpl(attributes);

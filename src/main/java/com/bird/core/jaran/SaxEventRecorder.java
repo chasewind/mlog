@@ -27,7 +27,8 @@ import com.bird.core.exceptions.JoranException;
 
 public class SaxEventRecorder extends DefaultHandler implements ContextAware {
 
-    final ContextAwareImpl cai;
+    public static final String XML_PARSING = "XML_PARSING";
+    final ContextAwareImpl     cai;
 
     public SaxEventRecorder(Context context){
         cai = new ContextAwareImpl(context, this);
@@ -161,23 +162,19 @@ public class SaxEventRecorder extends DefaultHandler implements ContextAware {
     }
 
     public void addInfo(String msg) {
-        cai.addInfo(msg);
+        cai.addError(msg);
     }
 
     public void addInfo(String msg, Throwable ex) {
-        cai.addInfo(msg, ex);
-    }
-
-    public void addStatus(Status status) {
-        cai.addStatus(status);
+        cai.addError(msg, ex);
     }
 
     public void addWarn(String msg) {
-        cai.addWarn(msg);
+        cai.addError(msg);
     }
 
     public void addWarn(String msg, Throwable ex) {
-        cai.addWarn(msg, ex);
+        cai.addError(msg, ex);
     }
 
     public Context getContext() {
@@ -190,6 +187,12 @@ public class SaxEventRecorder extends DefaultHandler implements ContextAware {
 
     public List<SaxEvent> getSaxEventList() {
         return saxEventList;
+    }
+
+    @Override
+    public void addError(String string, Exception e) {
+        // TODO Auto-generated method stub
+
     }
 
 }

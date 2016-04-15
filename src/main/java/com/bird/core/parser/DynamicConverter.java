@@ -74,4 +74,11 @@ abstract public class DynamicConverter<E> extends FormattingConverter<E> impleme
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public void addError(String string, Throwable t) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

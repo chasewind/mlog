@@ -7,4 +7,8 @@ public interface ContextAware {
     Context getContext();
 
     void addError(String string, Exception e);
+
+    void addError(String string);
+
+    void addError(String string, Throwable t);
 }

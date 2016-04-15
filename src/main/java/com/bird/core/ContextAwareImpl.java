@@ -33,4 +33,16 @@ public class ContextAwareImpl implements ContextAware {
 
     }
 
+    @Override
+    public void addError(String string) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addError(String string, Throwable t) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

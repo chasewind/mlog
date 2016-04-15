@@ -6,7 +6,7 @@ public class BodyEvent extends SaxEvent {
 
     private String text;
 
-    BodyEvent(String text, Locator locator){
+    public BodyEvent(String text, Locator locator){
         super(null, null, null, locator);
         this.text = text;
     }

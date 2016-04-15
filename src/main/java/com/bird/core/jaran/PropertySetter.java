@@ -4,8 +4,10 @@ import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
+import com.bird.core.AggregationType;
 import com.bird.core.ContextAwareBase;
 import com.bird.core.DefaultNestedComponentRegistry;
+import com.bird.core.exceptions.PropertySetterException;
 
 public class PropertySetter extends ContextAwareBase {
 
@@ -48,7 +50,7 @@ public class PropertySetter extends ContextAwareBase {
             try {
                 setProperty(setter, name, value);
             } catch (PropertySetterException ex) {
-                addWarn("Failed to set property [" + name + "] to value \"" + value + "\". ", ex);
+                addError("Failed to set property [" + name + "] to value \"" + value + "\". ", ex);
             }
         }
     }
@@ -231,7 +233,7 @@ public class PropertySetter extends ContextAwareBase {
         Method setter = findSetterMethod(name);
 
         if (setter == null) {
-            addWarn("Not setter method for property [" + name + "] in " + obj.getClass().getName());
+            addError("Not setter method for property [" + name + "] in " + obj.getClass().getName());
 
             return;
         }

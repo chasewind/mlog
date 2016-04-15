@@ -39,4 +39,10 @@ public class ContextAwareBase implements ContextAware {
     public void addError(String msg, Exception e) {
         System.err.println("error---->" + msg + ",<---" + e.getMessage());
     }
+
+    @Override
+    public void addError(String string, Throwable t) {
+        // TODO Auto-generated method stub
+
+    }
 }
