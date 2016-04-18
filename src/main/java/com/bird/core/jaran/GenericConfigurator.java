@@ -32,8 +32,6 @@ public abstract class GenericConfigurator extends ContextAwareBase {
         try {
             informContextOfURLUsedForConfiguration(getContext(), url);
             URLConnection urlConnection = url.openConnection();
-            // per http://jira.qos.ch/browse/LBCORE-105
-            // per http://jira.qos.ch/browse/LBCORE-127
             urlConnection.setUseCaches(false);
 
             in = urlConnection.getInputStream();
@@ -116,19 +114,10 @@ public abstract class GenericConfigurator extends ContextAwareBase {
         addDefaultNestedComponentRegistryRules(interpretationContext.getDefaultNestedComponentRegistry());
     }
 
-    // this is the most inner form of doConfigure whereto other doConfigure
-    // methods ultimately delegate
     public final void doConfigure(final InputSource inputSource) throws JoranException {
-
-        long threshold = System.currentTimeMillis();
-        // if (!ConfigurationWatchListUtil.wasConfigurationWatchListReset(context)) {
-        // informContextOfURLUsedForConfiguration(getContext(), null);
-        // }
         SaxEventRecorder recorder = new SaxEventRecorder(context);
         recorder.recordEvents(inputSource);
         doConfigure(recorder.saxEventList);
-        // no exceptions a this level
-
     }
 
     public void doConfigure(final List<SaxEvent> eventList) throws JoranException {

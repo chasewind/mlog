@@ -46,6 +46,8 @@ abstract public class JoranConfiguratorBase extends GenericConfigurator {
 
         rs.addRule(new ElementSelector("configuration/conversionRule"), new ConversionRuleAction());
 
+        // rs.addRule(new ElementSelector("configuration/statusListener"), new StatusListenerAction());
+
         rs.addRule(new ElementSelector("configuration/appender"), new AppenderAction());
         rs.addRule(new ElementSelector("configuration/appender/appender-ref"), new AppenderRefAction());
         rs.addRule(new ElementSelector("configuration/newRule"), new NewRuleAction());

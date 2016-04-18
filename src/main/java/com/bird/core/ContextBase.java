@@ -5,11 +5,12 @@ import java.util.Map;
 
 public class ContextBase implements Context, LifeCycle {
 
-    private long               birthTime        = System.currentTimeMillis();
+    private long               birthTime         = System.currentTimeMillis();
     private String             name;
-    Map<String, Object>        objectMap        = new HashMap<String, Object>();
-    Map<String, String>        propertyMap      = new HashMap<String, String>();
-    public static final String CONTEXT_NAME_KEY = "CONTEXT_NAME";
+    Map<String, Object>        objectMap         = new HashMap<String, Object>();
+    Map<String, String>        propertyMap       = new HashMap<String, String>();
+    public static final String CONTEXT_NAME_KEY  = "CONTEXT_NAME";
+    Object                     configurationLock = new Object();
 
     public String getName() {
         return name;
@@ -73,8 +74,7 @@ public class ContextBase implements Context, LifeCycle {
 
     @Override
     public Object getConfigurationLock() {
-        // TODO Auto-generated method stub
-        return null;
+        return configurationLock;
     }
 
     @Override

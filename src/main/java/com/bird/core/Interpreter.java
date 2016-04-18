@@ -13,6 +13,21 @@ import org.xml.sax.Locator;
 import com.bird.core.jaran.RuleStore;
 import com.bird.core.jaran.action.Action;
 
+/**
+ * 类Interpreter.java的实现描述：TODO 类实现描述
+ * <p>
+ * 该类对{@link org.xml.sax.helpers.DefaultHandler DefaultHandler}进行扩展，接入各种与定义的{@link com.bird.core.jaran.action.Action}
+ * 的不同实现
+ * </p>
+ * <p>
+ * 所有的格式匹配统一用{@link com.bird.core.jaran.RuleStore}承接，针对一个给定的pattern可以减少无用的Action调用
+ * </p>
+ * <p>
+ * 一个pattern的匹配方式根据<b>XPATH</b>的方式进行匹配，也即路径的匹配，<b>*</b>代表任意字符
+ * </p>
+ * 
+ * @author dongwei.ydw 2016年4月18日 下午8:21:31
+ */
 public class Interpreter {
 
     private static List<Action>             EMPTY_LIST = new Vector<Action>(0);
@@ -26,8 +41,7 @@ public class Interpreter {
     EventPlayer                             eventPlayer;
 
     /**
-     * The <id>actionListStack</id> contains a list of actions that are executing for the given XML element. A list of
-     * actions is pushed by the {link #startElement} and popped by {@link #endElement}.
+     * action栈给出了明确的操作方式通过{@link #startElement} 推入元素，通过{@link #endElement}弹出元素
      */
     Stack<List<Action>>                     actionListStack;
 
@@ -53,13 +67,6 @@ public class Interpreter {
 
     public void setInterpretationContextPropertiesMap(Map<String, String> propertiesMap) {
         interpretationContext.setPropertiesMap(propertiesMap);
-    }
-
-    /**
-     * @deprecated replaced by {@link #getInterpretationContext()}
-     */
-    public InterpretationContext getExecutionContext() {
-        return getInterpretationContext();
     }
 
     public InterpretationContext getInterpretationContext() {

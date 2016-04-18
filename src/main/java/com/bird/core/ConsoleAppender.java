@@ -8,7 +8,7 @@ public class ConsoleAppender<E> extends OutputStreamAppender<E> {
 
     @Override
     protected void append(E event) {
-        System.out.println("------");
+        System.out.println("console appender do------");
     }
 
     public void setTarget(String value) {

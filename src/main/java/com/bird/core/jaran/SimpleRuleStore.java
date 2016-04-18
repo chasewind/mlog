@@ -15,11 +15,7 @@ public class SimpleRuleStore extends ContextAwareBase implements RuleStore {
 
     static String                          KLEENE_STAR = "*";
 
-    // key: Pattern instance, value: ArrayList containing actions
     HashMap<ElementSelector, List<Action>> rules       = new HashMap<ElementSelector, List<Action>>();
-
-    // public SimpleRuleStore() {
-    // }
 
     public SimpleRuleStore(Context context){
         setContext(context);

@@ -209,4 +209,9 @@ public class LogContext extends ContextBase implements ILogFactory, LifeCycle {
     public List<String> getFrameworkPackages() {
         return frameworkPackages;
     }
+
+    public void addListener(LoggerContextListener lcl) {
+        // TODO Auto-generated method stub
+
+    }
 }

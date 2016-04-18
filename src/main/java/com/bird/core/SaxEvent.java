@@ -14,6 +14,7 @@ public class SaxEvent {
         this.namespaceURI = namespaceURI;
         this.localName = localName;
         this.qName = qName;
+        // 做快照
         // locator impl is used to take a snapshot!
         this.locator = new LocatorImpl(locator);
     }
