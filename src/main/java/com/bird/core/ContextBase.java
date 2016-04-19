@@ -3,6 +3,9 @@ package com.bird.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.bird.core.status.BasicStatusManager;
+import com.bird.core.status.StatusManager;
+
 public class ContextBase implements Context, LifeCycle {
 
     private long               birthTime         = System.currentTimeMillis();
@@ -11,6 +14,7 @@ public class ContextBase implements Context, LifeCycle {
     Map<String, String>        propertyMap       = new HashMap<String, String>();
     public static final String CONTEXT_NAME_KEY  = "CONTEXT_NAME";
     Object                     configurationLock = new Object();
+    private StatusManager      sm                = new BasicStatusManager();
 
     public String getName() {
         return name;
@@ -93,5 +97,17 @@ public class ContextBase implements Context, LifeCycle {
     public boolean isStarted() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    public StatusManager getStatusManager() {
+        return sm;
+    }
+
+    public void setStatusManager(StatusManager statusManager) {
+        // this method was added in response to http://jira.qos.ch/browse/LBCORE-35
+        if (statusManager == null) {
+            throw new IllegalArgumentException("null StatusManager not allowed");
+        }
+        this.sm = statusManager;
     }
 }

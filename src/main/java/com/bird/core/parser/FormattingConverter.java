@@ -9,6 +9,7 @@ import com.bird.core.SpacePadder;
  */
 public abstract class FormattingConverter<E> extends Converter<E> {
 
+    // 缓存初始大小
     static final int INITIAL_BUF_SIZE = 256;
     static final int MAX_CAPACITY     = 1024;
 

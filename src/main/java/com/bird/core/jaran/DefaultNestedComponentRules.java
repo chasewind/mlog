@@ -1,7 +1,7 @@
 package com.bird.core.jaran;
 
-import com.bird.core.AppenderBase;
 import com.bird.core.DefaultNestedComponentRegistry;
+import com.bird.core.appender.AppenderBase;
 import com.bird.core.layout.PatternLayout;
 import com.bird.core.layout.PatternLayoutEncoder;
 

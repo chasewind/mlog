@@ -1,12 +1,12 @@
 package com.bird.core.config;
 
 import com.bird.core.Configurator;
-import com.bird.core.ConsoleAppender;
 import com.bird.core.ContextAwareBase;
 import com.bird.core.FinalLog;
 import com.bird.core.ILoggingEvent;
 import com.bird.core.Log;
 import com.bird.core.LogContext;
+import com.bird.core.appender.ConsoleAppender;
 import com.bird.core.layout.LayoutWrappingEncoder;
 import com.bird.core.layout.TTLLLayout;
 

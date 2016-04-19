@@ -2,17 +2,20 @@ package com.bird.core;
 
 public class LoggingEvent implements ILoggingEvent {
 
-    private String     logName;
-    private LogContext logContext;
-    private Level      level;
-    private String     msg;
-    private long       timeStamp;
-    private String     threadName;
-    private Throwable  throwable;
+    private String          logName;
+    private LogContext      logContext;
+    private transient Level level;
+    private String          msg;
+    private long            timeStamp;
+    private String          threadName;
+    private Throwable       throwable;
+    private LoggerContextVO loggerContextVO;
+    transient String        formattedMessage;
 
     public LoggingEvent(FinalLog log, Level level, String msg, Throwable t){
         this.logName = log.getName();
         this.logContext = log.getLogContext();
+        this.loggerContextVO = logContext.getLoggerContextRemoteView();
         this.level = level;
         this.msg = msg;
         this.throwable = t;
@@ -45,10 +48,7 @@ public class LoggingEvent implements ILoggingEvent {
 
     @Override
     public StackTraceElement[] getCallerData() {
-        if (this.throwable != null) {
-            return this.throwable.getStackTrace();
-        }
-        return null;
+        return CallerData.extract(new Throwable(), FinalLog.class.getName(), 8, logContext.getFrameworkPackages());
     }
 
     @Override
@@ -58,17 +58,22 @@ public class LoggingEvent implements ILoggingEvent {
 
     @Override
     public LoggerContextVO getLogContextVO() {
-        return null;
+        return this.loggerContextVO;
     }
 
     @Override
     public Level getLevel() {
-        return null;
+        return this.level;
     }
 
     @Override
     public String getFormattedMessage() {
-        return null;
+        if (formattedMessage != null) {
+            return formattedMessage;
+        }
+        formattedMessage = this.msg;
+
+        return formattedMessage;
     }
 
     @Override

@@ -1,8 +1,10 @@
-package com.bird.core;
+package com.bird.core.appender;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.bird.core.Encoder;
 
 public class OutputStreamAppender<E> extends AppenderBase<E> {
 
@@ -42,6 +44,10 @@ public class OutputStreamAppender<E> extends AppenderBase<E> {
         } finally {
             lock.unlock();
         }
+    }
+
+    public OutputStream getOutputStream() {
+        return outputStream;
     }
 
     void encoderInit() {

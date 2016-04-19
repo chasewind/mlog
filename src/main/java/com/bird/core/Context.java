@@ -1,5 +1,7 @@
 package com.bird.core;
 
+import com.bird.core.status.StatusManager;
+
 public interface Context extends PropertyContainer {
 
     Object getObject(String key);
@@ -17,4 +19,6 @@ public interface Context extends PropertyContainer {
     String getName();
 
     void setName(String name);
+
+    StatusManager getStatusManager();
 }

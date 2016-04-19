@@ -2,6 +2,8 @@ package com.bird.core;
 
 import java.util.Iterator;
 
+import com.bird.core.appender.Appender;
+
 public interface AppenderAttachable<E> {
 
     /**

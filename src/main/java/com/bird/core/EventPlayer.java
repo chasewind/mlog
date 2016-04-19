@@ -13,12 +13,6 @@ public class EventPlayer {
         this.interpreter = interpreter;
     }
 
-    /**
-     * Return a copy of the current event list in the player.
-     * 
-     * @return
-     * @since 0.9.20
-     */
     public List<SaxEvent> getCopyOfPlayerEventList() {
         return new ArrayList<SaxEvent>(eventList);
     }

@@ -7,23 +7,19 @@ import com.bird.core.ContextAware;
 import com.bird.core.ContextAwareBase;
 import com.bird.core.LifeCycle;
 
+/**
+ * 类DynamicConverter.java的实现描述：TODO 类实现描述
+ * 
+ * @author dongwei.ydw 2016年4月19日 下午3:34:25
+ */
 abstract public class DynamicConverter<E> extends FormattingConverter<E> implements LifeCycle, ContextAware {
 
     ContextAwareBase     cab     = new ContextAwareBase(this);
 
-    // Contains a list of option Strings.
     private List<String> optionList;
 
-    /**
-     * Is this component active?
-     */
     protected boolean    started = false;
 
-    /**
-     * Components that depend on options passed during configuration can override this method in order to make
-     * appropriate use of those options. For simpler components, the trivial implementation found in this abstract class
-     * will be sufficient.
-     */
     public void start() {
         started = true;
     }
@@ -40,11 +36,6 @@ abstract public class DynamicConverter<E> extends FormattingConverter<E> impleme
         this.optionList = optionList;
     }
 
-    /**
-     * Return the first option passed to this component. The returned value may be null if there are no options.
-     * 
-     * @return First option, may be null.
-     */
     public String getFirstOption() {
         if (optionList == null || optionList.size() == 0) {
             return null;
@@ -70,14 +61,14 @@ abstract public class DynamicConverter<E> extends FormattingConverter<E> impleme
     }
 
     @Override
-    public void addError(String string, Exception e) {
-        // TODO Auto-generated method stub
+    public void addError(String msg, Exception e) {
+        cab.addError(msg, e);
 
     }
 
     @Override
-    public void addError(String string, Throwable t) {
-        // TODO Auto-generated method stub
+    public void addError(String msg, Throwable t) {
+        cab.addError(msg, t);
 
     }
 

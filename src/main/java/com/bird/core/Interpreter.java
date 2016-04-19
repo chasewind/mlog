@@ -104,9 +104,6 @@ public class Interpreter {
         }
     }
 
-    /**
-     * This method is used to
-     */
     private void pushEmptyActionList() {
         actionListStack.add(EMPTY_LIST);
     }
@@ -121,7 +118,6 @@ public class Interpreter {
         if (body != null) {
             body = body.trim();
             if (body.length() > 0) {
-                // System.out.println("calling body method with ["+body+ "]");
                 callBodyAction(applicableActionList, body);
             }
         }

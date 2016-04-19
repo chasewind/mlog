@@ -9,6 +9,19 @@ import com.bird.core.CoreConstants;
 import com.bird.core.ReplacingCompositeConverter;
 import com.bird.core.exceptions.ScanException;
 
+//~=lamda
+//E = TE|T
+
+//Left factorization
+//E = T(E|~)
+//Eopt = E|~
+//replace E|~ with Eopt in E
+//E = TEopt
+
+//T = LITERAL | '%' C | '%' FORMAT_MODIFIER C
+//C = SIMPLE_KEYWORD OPTION | COMPOSITE_KEYWORD COMPOSITE
+//OPTION = {...} | ~
+//COMPOSITE = E ')' OPTION
 public class Parser<E> extends ContextAwareBase {
 
     public final static String              MISSING_RIGHT_PARENTHESIS       = CoreConstants.CODES_URL

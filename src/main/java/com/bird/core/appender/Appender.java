@@ -1,4 +1,7 @@
-package com.bird.core;
+package com.bird.core.appender;
+
+import com.bird.core.ContextAware;
+import com.bird.core.LifeCycle;
 
 public interface Appender<E> extends ContextAware, LifeCycle {
 

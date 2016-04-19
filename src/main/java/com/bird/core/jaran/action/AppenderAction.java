@@ -5,10 +5,10 @@ import java.util.HashMap;
 import org.xml.sax.Attributes;
 
 import com.bird.core.ActionException;
-import com.bird.core.Appender;
 import com.bird.core.InterpretationContext;
 import com.bird.core.LifeCycle;
 import com.bird.core.OptionHelper;
+import com.bird.core.appender.Appender;
 import com.bird.core.jaran.ActionConst;
 
 public class AppenderAction<E> extends Action {

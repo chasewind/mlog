@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bird.core.Appender;
 import com.bird.core.ElementSelector;
 import com.bird.core.InterpretationContext;
 import com.bird.core.Interpreter;
+import com.bird.core.appender.Appender;
 import com.bird.core.jaran.action.AppenderAction;
 import com.bird.core.jaran.action.AppenderRefAction;
 import com.bird.core.jaran.action.ContextPropertyAction;

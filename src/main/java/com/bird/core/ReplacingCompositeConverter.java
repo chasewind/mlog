@@ -5,6 +5,11 @@ import java.util.regex.Pattern;
 
 import com.bird.core.parser.CompositeConverter;
 
+/**
+ * 类ReplacingCompositeConverter.java的实现描述：TODO 类实现描述
+ * 
+ * @author dongwei.ydw 2016年4月19日 下午3:40:43
+ */
 public class ReplacingCompositeConverter<E> extends CompositeConverter<E> {
 
     Pattern pattern;

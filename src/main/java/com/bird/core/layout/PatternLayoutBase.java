@@ -78,7 +78,11 @@ abstract public class PatternLayoutBase<E> extends LayoutBase<E> {
         StringBuilder buf = new StringBuilder(128);
         Converter<E> c = head;
         while (c != null) {
-            c.write(buf, event);
+            try {
+                c.write(buf, event);
+            } catch (Exception e) {
+                System.err.println(c + "--->" + e.getMessage());
+            }
             c = c.getNext();
         }
         return buf.toString();

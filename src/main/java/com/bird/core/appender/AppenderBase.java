@@ -1,4 +1,6 @@
-package com.bird.core;
+package com.bird.core.appender;
+
+import com.bird.core.ContextAwareBase;
 
 public abstract class AppenderBase<E> extends ContextAwareBase implements Appender<E> {
 

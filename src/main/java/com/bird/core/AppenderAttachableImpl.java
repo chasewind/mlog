@@ -3,6 +3,8 @@ package com.bird.core;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.bird.core.appender.Appender;
+
 public class AppenderAttachableImpl<E> implements AppenderAttachable<E> {
 
     final private CopyOnWriteArrayList<Appender<E>> appenderList = new CopyOnWriteArrayList<Appender<E>>();

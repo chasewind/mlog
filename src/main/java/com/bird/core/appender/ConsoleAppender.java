@@ -1,15 +1,12 @@
-package com.bird.core;
+package com.bird.core.appender;
 
 import java.io.OutputStream;
+
+import com.bird.core.ConsoleTarget;
 
 public class ConsoleAppender<E> extends OutputStreamAppender<E> {
 
     protected ConsoleTarget target = ConsoleTarget.SystemOut;
-
-    @Override
-    protected void append(E event) {
-        System.out.println("console appender do------");
-    }
 
     public void setTarget(String value) {
         ConsoleTarget t = ConsoleTarget.findByName(value.trim());

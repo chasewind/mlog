@@ -123,6 +123,7 @@ public abstract class GenericConfigurator extends ContextAwareBase {
     public void doConfigure(final List<SaxEvent> eventList) throws JoranException {
         buildInterpreter();
         // disallow simultaneous configurations of the same context
+        // 相同的上下文拒绝存在相同的配置
         synchronized (context.getConfigurationLock()) {
             interpreter.getEventPlayer().play(eventList);
         }

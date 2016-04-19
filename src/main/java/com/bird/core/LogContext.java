@@ -211,7 +211,6 @@ public class LogContext extends ContextBase implements ILogFactory, LifeCycle {
     }
 
     public void addListener(LoggerContextListener lcl) {
-        // TODO Auto-generated method stub
-
+        System.err.println("listener add position but do nothing..");
     }
 }
