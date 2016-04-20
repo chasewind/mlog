@@ -2,9 +2,15 @@ package com.bird.core.appender;
 
 import com.bird.core.ContextAwareBase;
 
+/**
+ * 类AppenderBase.java的实现描述：TODO 类实现描述:{@link Appender}的基本实现骨架
+ * 
+ * @author dongwei.ydw 2016年4月19日 下午7:30:35
+ */
 public abstract class AppenderBase<E> extends ContextAwareBase implements Appender<E> {
 
     protected String             name;
+    /** 防止重复调用 */
     private ThreadLocal<Boolean> guard             = new ThreadLocal<Boolean>();
     protected volatile boolean   started           = false;
     private int                  statusRepeatCount = 0;

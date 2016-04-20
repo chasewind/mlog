@@ -10,66 +10,49 @@ import java.util.Map.Entry;
 import com.bird.core.CoreConstants;
 import com.bird.core.recovery.ResilientFileOutputStream;
 
+/**
+ * 类FileAppender.java的实现描述：TODO 类实现描述：输出日志到文件
+ * 
+ * @author dongwei.ydw 2016年4月19日 下午7:39:02
+ */
 public class FileAppender<E> extends OutputStreamAppender<E> {
 
     static protected String COLLISION_WITH_EARLIER_APPENDER_URL = CoreConstants.CODES_URL + "#earlier_fa_collision";
 
-    /**
-     * Append to or truncate the file? The default value for this variable is <code>true</code>, meaning that by default
-     * a <code>FileAppender</code> will append to an existing file and not truncate it.
-     */
+    /** 判断是进行追加操作还是把之前的清空之后再写 */
     protected boolean       append                              = true;
 
-    /**
-     * The name of the active log file.
-     */
     protected String        fileName                            = null;
 
     private boolean         prudent                             = false;
 
-    /**
-     * The <b>File</b> property takes a string value which should be the name of the file to append to.
-     */
     public void setFile(String file) {
         if (file == null) {
             fileName = file;
         } else {
-            // Trim spaces from both ends. The users probably does not want
-            // trailing spaces in file names.
             fileName = file.trim();
         }
     }
 
     /**
-     * Returns the value of the <b>Append</b> property.
+     * 判断是进行追加操作还是把之前的清空之后再写
      */
     public boolean isAppend() {
         return append;
     }
 
     /**
-     * This method is used by derived classes to obtain the raw file property. Regular users should not be calling this
-     * method.
-     * 
-     * @return the value of the file property
+     * 获取文件原始属性，这里返回的是文件名
      */
     final public String rawFileProperty() {
         return fileName;
     }
 
-    /**
-     * Returns the value of the <b>File</b> property.
-     * <p>
-     * This method may be overridden by derived classes.
-     */
     public String getFile() {
         return fileName;
     }
 
-    /**
-     * If the value of <b>File</b> is not <code>null</code>, then {@link #openFile} is called with the values of
-     * <b>File</b> and <b>Append</b> properties.
-     */
+    @Override
     public void start() {
         int errors = 0;
         if (getFile() != null) {
@@ -130,17 +113,6 @@ public class FileAppender<E> extends OutputStreamAppender<E> {
                  + appenderName + "] defined earlier.");
     }
 
-    /**
-     * <p>
-     * Sets and <i>opens</i> the file where the log output will go. The specified file must be writable.
-     * <p>
-     * If there was already an opened file, then the previous file is closed first.
-     * <p>
-     * <b>Do not use this method directly. To configure a FileAppender or one of its subclasses, set its properties one
-     * by one and then call start().</b>
-     * 
-     * @param file_name The path to the log file.
-     */
     public void openFile(String file_name) throws IOException {
         lock.lock();
         try {
@@ -158,19 +130,10 @@ public class FileAppender<E> extends OutputStreamAppender<E> {
         }
     }
 
-    /**
-     * @see #setPrudent(boolean)
-     * @return true if in prudent mode
-     */
     public boolean isPrudent() {
         return prudent;
     }
 
-    /**
-     * When prudent is set to true, file appenders from multiple JVMs can safely write to the same file.
-     * 
-     * @param prudent
-     */
     public void setPrudent(boolean prudent) {
         this.prudent = prudent;
     }
@@ -186,7 +149,6 @@ public class FileAppender<E> extends OutputStreamAppender<E> {
             return;
         }
 
-        // Clear any current interrupt (see LOGBACK-875)
         boolean interrupted = Thread.interrupted();
 
         FileLock fileLock = null;
@@ -199,14 +161,12 @@ public class FileAppender<E> extends OutputStreamAppender<E> {
             }
             super.writeOut(event);
         } catch (IOException e) {
-            // Mainly to catch FileLockInterruptionExceptions (see LOGBACK-875)
             resilientFOS.postIOFailure(e);
         } finally {
             if (fileLock != null && fileLock.isValid()) {
                 fileLock.release();
             }
 
-            // Re-interrupt if we started in an interrupted state (see LOGBACK-875)
             if (interrupted) {
                 Thread.currentThread().interrupt();
             }

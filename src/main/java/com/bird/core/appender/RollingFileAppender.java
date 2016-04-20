@@ -6,10 +6,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.bird.core.CoreConstants;
-import com.bird.core.exceptions.RolloverFailure;
+import com.bird.core.exceptions.RolloverFailureException;
 import com.bird.core.helpers.CompressionMode;
 import com.bird.core.helpers.FileNamePattern;
 
+/**
+ * 类RollingFileAppender.java的实现描述：TODO 类实现描述
+ * 
+ * @author dongwei.ydw 2016年4月19日 下午7:53:24
+ */
 public class RollingFileAppender<E> extends FileAppender<E> {
 
     File                  currentlyActiveFile;
@@ -125,8 +130,6 @@ public class RollingFileAppender<E> extends FileAppender<E> {
 
     @Override
     public void setFile(String file) {
-        // http://jira.qos.ch/browse/LBCORE-94
-        // allow setting the file name to null if mandated by prudent mode
         if (file != null && ((triggeringPolicy != null) || (rollingPolicy != null))) {
             addError("File property must be set before any triggeringPolicy or rollingPolicy properties");
             addError(CoreConstants.MORE_INFO_PREFIX + RFA_LATE_FILE_URL);
@@ -145,11 +148,6 @@ public class RollingFileAppender<E> extends FileAppender<E> {
     public void rollover() {
         lock.lock();
         try {
-            // Note: This method needs to be synchronized because it needs exclusive
-            // access while it closes and then re-opens the target file.
-            //
-            // make sure to close the hereto active log file! Renaming under windows
-            // does not work for open files.
             this.closeOutputStream();
             attemptRollover();
             attemptOpenFile();
@@ -160,10 +158,8 @@ public class RollingFileAppender<E> extends FileAppender<E> {
 
     private void attemptOpenFile() {
         try {
-            // update the currentlyActiveFile LOGBACK-64
             currentlyActiveFile = new File(rollingPolicy.getActiveFileName());
 
-            // This will also close the file. This is OK since multiple close operations are safe.
             this.openFile(rollingPolicy.getActiveFileName());
         } catch (IOException e) {
             addError("setFile(" + fileName + ", false) call failed.", e);
@@ -173,9 +169,8 @@ public class RollingFileAppender<E> extends FileAppender<E> {
     private void attemptRollover() {
         try {
             rollingPolicy.rollover();
-        } catch (RolloverFailure rf) {
+        } catch (RolloverFailureException rf) {
             addError("RolloverFailure occurred. Deferring roll-over.");
-            // we failed to roll-over, let us not truncate and risk data loss
             this.append = true;
         }
     }
@@ -185,11 +180,7 @@ public class RollingFileAppender<E> extends FileAppender<E> {
      */
     @Override
     protected void subAppend(E event) {
-        // The roll-over check must precede actual writing. This is the
-        // only correct behavior for time driven triggers.
 
-        // We need to synchronize on triggeringPolicy so that only one rollover
-        // occurs at a time
         synchronized (triggeringPolicy) {
             if (triggeringPolicy.isTriggeringEvent(currentlyActiveFile, event)) {
                 rollover();
@@ -207,12 +198,6 @@ public class RollingFileAppender<E> extends FileAppender<E> {
         return triggeringPolicy;
     }
 
-    /**
-     * Sets the rolling policy. In case the 'policy' argument also implements {@link TriggeringPolicy}, then the
-     * triggering policy for this appender is automatically set to be the policy argument.
-     *
-     * @param policy
-     */
     @SuppressWarnings("unchecked")
     public void setRollingPolicy(RollingPolicy policy) {
         rollingPolicy = policy;

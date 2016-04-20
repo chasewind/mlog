@@ -6,6 +6,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.bird.core.Encoder;
 
+/**
+ * 类OutputStreamAppender.java的实现描述：TODO 类实现描述:线程非同步，让调用者自己处理线程同步问题，该类不处理,同时挂接{@link OutputStream}
+ * 
+ * @author dongwei.ydw 2016年4月19日 下午7:34:34
+ */
 public class OutputStreamAppender<E> extends AppenderBase<E> {
 
     protected final ReentrantLock lock = new ReentrantLock(true);
